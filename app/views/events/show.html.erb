@@ -31,30 +31,6 @@
           <br>
           <h3 class="h4 push-20 animated fadeIn" data-toggle="appear">Local</h3>
           <%= @event.local.html_safe %>
-          <!--<table class="table table-borderless table-vcenter">-->
-          <!--<tbody>-->
-          <!--<tr class="active">-->
-          <!--<th style="width: 50px;"></th>-->
-          <!--<th>1. Intro</th>-->
-          <!--<th class="font-s12 text-right">-->
-          <!--<span class="text-muted">0.2 hours</span>-->
-          <!--</th>-->
-          <!--</tr>-->
-          <!--<tr>-->
-          <!--<td class="success text-center">-->
-          <!--<i class="fa fa-fw fa-unlock text-success"></i>-->
-          <!--</td>-->
-          <!--<td>-->
-          <!--<a href="frontend_elearning_lesson.php">1.1 HTML5 Intro (free preview)</a>-->
-          <!--</td>-->
-          <!--<td class="text-right">-->
-          <!--<em class="font-s12 text-muted">12 min</em>-->
-          <!--</td>-->
-          <!--</tr>-->
-          <!--</tbody>-->
-          <!--</table>-->
-
-
         </div>
 
       </div>
@@ -62,89 +38,67 @@
     <div class="col-md-4">
       <div class="block block-rounded">
         <div class="block-content">
-          <%if @event.event_happened?%>
-              <center>Este evento já aconteceu</center>
-          <%else%>
-              <% if user_signed_in?  %>
+          <% if @event.event_happened? %>
+            <center>Este evento já aconteceu</center>
+          <% else %>
+            <% if user_signed_in?  %>
+              <% if @event.is_registrated?(current_user.id) %>
+                  <center>Você já esta registrado neste evento</center>
+              <% else %>
+                <%= simple_form_for :register, { url: register_events_path(:id=>@event.id, :user_id=>current_user.id) } do |f| %>
+                  <%if current_user.cpf.blank?%>
+                    <%= f.label :cpf ,"CPF"%>
+                    <%= f.text_field :cpf  ,class:"form-control  cpf"%>
+                  <%end%>
+                  <div class="col-xs-12">
+                    <label class="css-input css-checkbox css-checkbox-success">
+                      <%= f.check_box :need_certificate  ,class:"form-control  cpf"%><span></span>Deseja Certificado?
+                    </label>
+                  </div>
 
-                  <%if @event.is_registrated?(current_user.id)%>
-                      <center>Você já esta registrado neste evento</center>
-                  <%else%>
-                      <%= simple_form_for :register, { url: register_events_path(:id=>@event.id, :user_id=>current_user.id) } do |f| %>
-
-                          <%if current_user.cpf.blank?%>
-                              <%= f.label :cpf ,"CPF"%>
-                              <%= f.text_field :cpf  ,class:"form-control  cpf"%>
-                          <%end%>
-                          <div class="col-xs-12">
-                            <label class="css-input css-checkbox css-checkbox-success">
-                              <%= f.check_box :need_certificate  ,class:"form-control  cpf"%><span></span>Deseja Certificado?
-                            </label>
-                          </div>
-
-                          <br>
-                          <br>
-                          <%= f.submit "Inscrever-se", data: { disable_with: "Cadastrando..." } ,class: "btn btn-block btn-rounded btn-noborder btn-success push-10"%>
-                      <% end %>
-                  <% end %>
-
-              <%else%>
-                  <%= link_to new_user_session_path, :class => 'btn btn-block btn-rounded btn-noborder btn-success push-10' do %>
-                      Inscrever-se
-                  <% end %>
-              <%end%>
-          <%end%>
-
+                  <br>
+                  <br>
+                  <%= f.submit "Inscrever-se", data: { disable_with: "Cadastrando..." } ,class: "btn btn-block btn-rounded btn-noborder btn-success push-10"%>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= link_to new_user_session_path, :class => 'btn btn-block btn-rounded btn-noborder btn-success push-10' do %>
+                  Inscrever-se
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
       </div>
+
+      <!-- INI.SOBRE ESTE EVENTO -->
       <div class="block block-rounded">
         <div class="block-header bg-gray-lighter text-center">
           <h3 class="block-title">Sobre este Evento</h3>
         </div>
         <div class="block-content">
-          <table class="table table-borderless table-condensed">
-            <tbody>
-            <tr>
-              <td>
-                <!--<i class="fa fa-fw fa-book push-10-r"></i> 3 palestras-->
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <i class="fa fa-fw fa-clock-o push-10-r"></i> <%=@event.event_duration%> horas duração
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <i class="fa fa-fw fa-user push-10-r"></i> <%= @event.participants_limit %> Total de Vagas
-              </td>
-            </tr>
-
-
-            <!--<tr>-->
-            <!--<td>-->
-            <!--<i class="fa fa-fw fa-tags push-10-r"></i>-->
-            <!--<a class="label label-primary" href="javascript:void(0)">HTML</a>-->
-            <!--<a class="label label-primary" href="javascript:void(0)">CSS</a>-->
-            <!--<a class="label label-primary" href="javascript:void(0)">JavaScript</a>-->
-            <!--</td>-->
-            <!--</tr>-->
-            </tbody>
-          </table>
+          <ul class="list-unstyled push-20">
+            <li class="push-10"><span class="fa fa-fw fa-clock-o push-10-r"></span><%=@event.event_duration%> horas de duração</li>
+            <li><span class="fa fa-fw fa-user push-10-r"></span><%= @event.participants_limit %> vagas no total</li>
+          </ul>
         </div>
       </div>
-      <!--<a class="block block-rounded block-link-hover3" href="javascript:void(0)">-->
-      <!--<div class="block-header bg-gray-lighter text-center">-->
-      <!--<h3 class="block-title">About The Instructor</h3>-->
-      <!--</div>-->
-      <!--<div class="block-content block-content-full text-center">-->
-      <!--<div class="push">-->
-      <!--<img class="img-avatar" src="assets/img/avatars/avatar14.jpg" alt="">-->
-      <!--</div>-->
-      <!--<div class="font-w600 push-5">Scott Ruiz</div>-->
-      <!--<div class="text-muted">Front-end Developer</div>-->
-      <!--</div>-->
-      <!--</a>-->
+      <!-- END.SOBRE ESTE EVENTO -->
+
+      <% if can?(:update, @event) %>
+        <!-- INI.ACESSO RESTRITO -->
+        <div class="block block-rounded">
+          <div class="block-header bg-gray-lighter text-center">
+            <h3 class="block-title">Acesso Restrito</h3>
+          </div>
+          <div class="block-content">
+            <ul class="list-unstyled push-20">
+              <li><span class="fa fa-fw fa-gear push-10-r"></span><%= link_to("Gerenciar presenças", event_registrations_path(@event)) %></li>
+            </ul>
+          </div>
+        </div>
+        <!-- END.ACESSO RESTRITO -->
+      <% end %>
+
     </div>
   </div>
 </section>

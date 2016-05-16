@@ -1,0 +1,5 @@
+<tr id="registration-<%= registration.id %>" data-id="<%= registration.id %>">
+  <td><%= registration.user.email %></td>
+  <td><%= registration.user.name %></td>
+  <td class="js-ev-presence"><%= presence_buttons(registration) %></td>
+</tr>

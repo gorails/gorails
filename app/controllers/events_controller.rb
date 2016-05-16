@@ -1,11 +1,9 @@
 # app/controllers/events_controller.rb
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :register]
-  before_filter :authenticate_user!,except: [:index,:show]
-  #before_filter do
-  # redirect_to :new_user_session_path unless current_user && current_user.admin?
-  #end
-  load_and_authorize_resource :except => [:index, :show]
+  before_action :set_event, only: %i(show edit update destroy register)
+  before_filter :authenticate_user!, except: %i(index show)
+
+  load_and_authorize_resource except: %i(index show)
 
   # GET /events
   # GET /events.json

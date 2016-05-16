@@ -5,6 +5,16 @@
  *
  */
 
+function forgeryProtectedFormParams (method) {
+  'use strict';
+
+  var params = {}, csrfField = $('meta[name=csrf-param]').attr('content');
+  if (method) { params._method = method; }
+  params[csrfField] = $('meta[name=csrf-token]').attr('content');
+
+  return params;
+}
+
 var App = function() {
     // Helper variables - set in uiInit()
     var $lHtml, $lBody, $lPage, $lSidebar, $lSidebarScroll, $lSideOverlay, $lSideOverlayScroll, $lHeader, $lMain, $lFooter;
