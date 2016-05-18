@@ -1,0 +1,15 @@
+<p class="text-primary">Total de <span id="ev-total"><%= registrations.count %></span> inscritos, com <span id="ev-present"><%= presents_count %></span> presentes</p>
+
+<table class="table table-striped" data-url-base="<%= event_registration_path(@event, ':id') %>" id="event-registrations-list">
+  <thead>
+    <tr>
+      <th>E-mail</th>
+      <th>Nome</th>
+      <th>Presente?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render registrations %>
+  </tbody>
+</table>

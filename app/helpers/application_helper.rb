@@ -1,5 +1,17 @@
 module ApplicationHelper
 
+  def include_view_javascript
+    js_path = Rails.root.join('app/assets/javascripts/views', params[:controller], "#{params[:action]}.*")
+    return unless Dir[js_path].present?
+    javascript_include_tag "views/#{params[:controller]}/#{params[:action]}"
+  end
+
+  def include_controller_javascript
+    js_path = Rails.root.join('app/assets/javascripts/controllers', "#{params[:controller]}.*")
+    return unless Dir[js_path].present?
+    javascript_include_tag "controllers/#{params[:controller]}"
+  end
+
   def show_by_file_type(attachment)
     if attachment.present?
       case File.extname(attachment.file.filename)

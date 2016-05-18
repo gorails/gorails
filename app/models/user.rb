@@ -65,6 +65,9 @@ class User < ActiveRecord::Base
   mount_uploader :cover_photo, AttachmentsUploader
   accepts_nested_attributes_for :attachments
 
+  def name
+    [first_name, last_name].join(" ").strip
+  end
 
   def self.human_attribute_name(attr, vazio=nil)
     HUMANIZED_ATTRIBUTES[attr.to_sym] || super

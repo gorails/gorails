@@ -48,6 +48,8 @@
   <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
   <!-- END Stylesheets -->
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= include_controller_javascript %>
+  <%= include_view_javascript %>
 </head>
 <body>
 <%= render '/layouts/flash_messages'  ,locals: { flash: flash }%>
