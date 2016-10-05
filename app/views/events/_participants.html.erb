@@ -1,5 +1,11 @@
+<h3>Quem   <%= @event.event_happened? ? "marcou" : "já confirmou"%> presença no Evento</h3>
+<br>
 <div class="row">
-  <% @event.registrations.each do |registration| %>
+  <%
+    condition = {}
+    condition = { presence: true } if @event.event_happened?
+  %>
+  <% @event.registrations.where(condition).each do |registration| %>
       <div class="col-sm-6 col-lg-1 " >
         <div class="block-content block-content-full clearfix">
           <%#if registration.user.avatar.present?%>

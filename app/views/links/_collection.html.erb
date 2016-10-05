@@ -1,20 +1,22 @@
 <% collection.each do |resource| %>
-    <tr id="<%= dom_id(resource)%>">
-              <td><%= resource.name %></td>
-              <td><%= resource.link %></td>
-              <td><%= resource.link_category.name %></td>
-            <td class="text-center">
+    <tr id="<%= dom_id(resource) %>">
+      <td><%= resource.name %></td>
+      <td><%= resource.link %></td>
+      <td><%= resource.link_category.name %></td>
+      <td class="text-center">
         <div class="btn-group">
-           <%= link_to link_path(resource), data: { toggle: 'tooltip', original_title: I18n.t('misc.action.show')}, title: '', class: "btn btn-xs btn-default" do %>
-             <i class="fa fa-list"></i>
-           <% end %>
-             <%= link_to edit_link_path(resource) , data: { toggle: 'tooltip', original_title: I18n.t('misc.action.edit')}, title: '', class: "btn btn-xs btn-default" do %>
-             <i class="fa fa-pencil"></i>
-           <% end %>
-             <%= link_to link_path(resource) , data: { toggle: 'tooltip', original_title: I18n.t('misc.action.destroy')}, title: '', class: "btn btn-xs btn-default" do %>
-             <i class="fa fa-times"></i>
-           <% end %> 
-        </div>
+          <%= link_to link_path(resource), data: {toggle: 'tooltip', original_title: I18n.t('misc.action.show')}, title: '', class: "btn btn-xs btn-default" do %>
+              <i class="fa fa-list"></i>
+          <% end %>
+          <%= link_to edit_link_path(resource), data: {toggle: 'tooltip', original_title: I18n.t('misc.action.edit')}, title: '', class: "btn btn-xs btn-default" do %>
+              <i class="fa fa-pencil"></i>
+          <% end %>
+
+          <%= link_to link_path(resource), method: :delete, data: { confirm: 'Are you sure?' }, title: '', class: "btn btn-xs btn-default" do %>
+              <i class="fa fa-times"></i>
+          <% end %>
+          </div>
+      </td>
       </td>
     </tr>
 <% end %>

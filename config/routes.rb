@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :social_network_types
   resources :winners
   get 'activities/index'
 
@@ -13,11 +14,10 @@ Rails.application.routes.draw do
   resources :gifts
   resources :link_categories
   resources :partners
-  resources :events, :path => 'eventos' do
+  resources :events, path: 'eventos' do
     post :register, on: :member
-    collection do
-      post 'register'
-    end
+    collection { post 'register' }
+    resources :registrations, controller: 'event_registrations'
   end
   resources :attachments
   devise_for :users, :controllers => {registrations: 'registrations', omniauth_callbacks: "omniauth_callbacks" }

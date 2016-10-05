@@ -1,24 +1,21 @@
-
-
 <% if user_signed_in? %>
 
     <% if can? :magage, link_categories_path %>
         <li class="nav-main-heading"><span class="sidebar-mini-hide">Admin</span></li>
         <li>
-          <a href="/link_categories"><i class="si si-envelope-open"></i><span class="sidebar-mini-hide"> Categorias de Links</span></a>
+          <a href="/link_categories"><i class="si si-list"></i><span class="sidebar-mini-hide"> Categorias de Links</span></a>
         </li>
     <% end %>
 
     <% if can? :magage, link_categories_path %>
         <li>
-          <a href="/links"><i class="si si-envelope-open"></i><span class="sidebar-mini-hide"> Links</span></a>
+          <a href="/links"><i class="si si-link"></i><span class="sidebar-mini-hide"> Links</span></a>
         </li>
-        <li>
-          <a href="/activities/index"><i class="si si-envelope-open"></i><span class="sidebar-mini-hide">Atividades</span></a>
-        </li>
+
+        <%= link_to activities_index_path do %>
+            <i class="si si-list"></i><span class="sidebar-mini-hide">Atividades</span>
+        <% end %>
     <% end %>
-
-
 
 <% else %>
 

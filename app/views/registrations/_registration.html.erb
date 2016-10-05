@@ -1,0 +1,7 @@
+<tr id="registration-<%= registration.id %>" data-id="<%= registration.id %>">
+  <% user_presenter = UserPresenter.new(registration.user) -%>
+  <td class="text-right"><%= user_presenter.user_avatar(true, 32, false) %></td>
+  <td><%= user_presenter.email %></td>
+  <td><%= user_presenter.name %></td>
+  <td class="js-ev-presence"><%= presence_buttons(registration) %></td>
+</tr>

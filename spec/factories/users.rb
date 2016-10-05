@@ -1,3 +1,5 @@
+require 'cpf_faker'
+
 FactoryGirl.define do
   factory :user do
     nickname 'MyNickName'
@@ -8,12 +10,12 @@ FactoryGirl.define do
   end
 
   factory :user_with_cpf, parent: :user do
-    email 'user@test.com'
-    cpf '54256315454'
+    email { generate(:email) }
+    cpf { Faker::CPF.numeric }
   end
 
   factory :user_without_cpf, parent: :user do
-    email 'user2@test.com'
+    email { generate(:email) }
     cpf nil
   end
 

@@ -1,329 +1,355 @@
+<main id="main-container" style="min-height: 277px;">
+  <div class="content content-boxed">
+
+    <%= render "users/user_cover" %>
+
+    <%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="block">
+          <ul class="nav nav-tabs nav-justified push-20" data-toggle="tabs">
+            <li class="">
+              <a href="#tab-profile-personal"><i class="fa fa-fw fa-pencil"></i> Dados Pessoais</a>
+            </li>
+            <!--<li class="">-->
+            <!--<a href="#tab-profile-password"><i class="fa fa-fw fa-asterisk"></i> Senhas</a>-->
+            <!--</li>-->
+            <!--<li class="active">-->
+            <!--<a href="#tab-profile-privacy"><i class="fa fa-fw fa-lock"></i> Privacidade</a>-->
+            <!--</li>-->
+          </ul>
+          <div class="block-content tab-content">
+            <div class="tab-pane fade fade active in" id="tab-profile-personal">
+              <div class="row items-push">
+                <div class="col-sm-6 col-sm-offset-3 form-horizontal">
 
 
-<main id="main-container" style="min-height: 277px;"><div class="content content-boxed">
+                  <div class="form-group">
 
-  <%=render "users/user_cover"%>
+                    <% if current_user.avatar.url.present? %>
+                        <%#= show_by_file_type(current_user.avatar)%>
+                        <div class="col-xs-6">
+                          <label for="profile-password">Imagem de Perfil</label>
+                          <%= f.file_field :avatar, accept: "image/jpeg, image/jpg, image/gif, image/png" %>
+                        </div>
+                        <div class="col-xs-6">
+                          <label for="profile-password">Capa de Perfil</label>
+                          <%= f.file_field :cover_photo, accept: "image/jpeg, image/jpg, image/gif, image/png" %>
+                        </div>
+                    <% else %>
+                        <div class="col-xs-6">
+                          <label for="profile-password">Imagem de Perfil</label>
+                          <%= f.file_field :avatar, accept: "image/jpeg, image/jpg, image/gif, image/png" %>
+                        </div>
+                        <div class="col-xs-6">
+                          <label for="profile-password">Capa de Perfil</label>
+                          <%= f.file_field :cover_photo, accept: "image/jpeg, image/jpg, image/gif, image/png" %>
+                        </div>
+                    <% end %>
+                  </div>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= devise_error_messages! %>
-      <div class="block">
-        <ul class="nav nav-tabs nav-justified push-20" data-toggle="tabs">
-          <li class="">
-            <a href="#tab-profile-personal"><i class="fa fa-fw fa-pencil"></i> Dados Pessoais</a>
-          </li>
-          <!--<li class="">-->
-          <!--<a href="#tab-profile-password"><i class="fa fa-fw fa-asterisk"></i> Senhas</a>-->
-          <!--</li>-->
-          <!--<li class="active">-->
-          <!--<a href="#tab-profile-privacy"><i class="fa fa-fw fa-lock"></i> Privacidade</a>-->
-          <!--</li>-->
-        </ul>
-        <div class="block-content tab-content">
-          <div class="tab-pane fade fade active in" id="tab-profile-personal">
-            <div class="row items-push">
-              <div class="col-sm-6 col-sm-offset-3 form-horizontal">
+                  <div class="form-group">
+                    <br>
+                    <br>
+                    <div class="col-xs-12">
+                      <label class="css-input css-checkbox css-checkbox-success">
+                        <%= f.check_box :need_certificate, class: "form-control  cpf" %><span></span>Deseja Certificado
+                        para os eventos?
+                      </label>
+                    </div>
+                    <br>
+                    <br>
+
+                    <div class="col-xs-12">
+                      <%= f.label :email, "Endereço de E-mail" %>
+                      <%= f.email_field :email, autofocus: true, placeholder: "Enter your email..", class: "form-control input-lg" %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-6">
+                      <%= f.label :first_name, "Primeiro Nome" %>
+                      <%= f.text_field :first_name, placeholder: "Digite seu primeiro nome..", class: "form-control input-lg" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= f.label :last_name, "Sobrenome" %>
+                      <%= f.text_field :last_name, placeholder: "Digite seu sobrenome nome..", class: "form-control input-lg" %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <%= f.label :bio, "Biografia" %>
+                      <%= f.text_field :bio, class: "form-control input-lg", placeholder: "Digite alguns detalhes sobre você mesmo.." %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-6">
+                      <%= f.label :cpf, "CPF" %>
+                      <%= f.text_field :cpf, class: "form-control input-lg cpf" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= f.label :job_title, "Cargo/Função" %>
+                      <%= f.text_field :job_title, placeholder: "Digite seu Cargo/Função..", class: "form-control input-lg" %>
+                    </div>
 
 
-                <div class="form-group">
+                    <div class="col-xs-6">
+                      <%= f.label :rg, "Identidade" %>
+                      <%= f.text_field :rg, class: "form-control input-lg" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= f.label :consignor_organ, "Órgão Expedidor" %>
+                      <%= f.text_field :consignor_organ, class: "form-control input-lg" %>
+                    </div>
 
-                  <%if current_user.avatar.url.present?%>
-                      <%#= show_by_file_type(current_user.avatar)%>
-                      <div class="col-xs-6">
-                        <label for="profile-password">Imagem de Perfil</label>
-                        <%= f.file_field :avatar, accept: "image/jpeg, image/jpg, image/gif, image/png"  %>
-                      </div>
-                      <div class="col-xs-6">
-                        <label for="profile-password">Capa de Perfil</label>
-                        <%= f.file_field :cover_photo, accept: "image/jpeg, image/jpg, image/gif, image/png"  %>
-                      </div>
-                  <%else%>
-                      <div class="col-xs-6">
-                        <label for="profile-password">Imagem de Perfil</label>
-                        <%= f.file_field :avatar, accept: "image/jpeg, image/jpg, image/gif, image/png"  %>
-                      </div>
-                      <div class="col-xs-6">
-                        <label for="profile-password">Capa de Perfil</label>
-                        <%= f.file_field :cover_photo, accept: "image/jpeg, image/jpg, image/gif, image/png"  %>
-                      </div>
-                  <%end%>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <%= f.label :company, "Empresa" %>
+                      <%= f.text_field :company, class: "form-control input-lg" %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-6">
+                      <%= f.label :phone, "Telefone (Fixo)" %>
+                      <%= f.text_field :phone, class: "form-control input-lg phone" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= f.label :celphone, "Telefone (Celular)" %>
+                      <%= f.text_field :celphone, class: "form-control input-lg celphone" %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <%= f.label :schooling, "Escolaridade" %>
+                      <%= f.select :schooling, ['Ensino Médio Incompleto', 'Ensino Médio Completo', 'Ensino Superior', 'Pós-Graduação'] %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-6">
+                      <%= f.label :birth_date, "Data de Nascimento" %>
+                      <%= date_picker f, :birth_date %>
+                    </div>
+                    <div class="col-xs-6" style="margin-top: 20px;font-size: 20px">
+                      <%= f.label :gender, "Sexo" %>
+                      <%= f.select :gender, ['Masculino', 'Feminino'] %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-6">
+                      <%= f.label :marital_status, "Estado Civil" %>
+                      <%= f.text_field :marital_status, class: "form-control input-lg" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= f.label :place_of_birth, "Naturalidade" %>
+                      <%= f.text_field :place_of_birth, class: "form-control input-lg" %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-6">
+                      <%= f.label :father, "Filiação (Pai)" %>
+                      <%= f.text_field :father, class: "form-control input-lg" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= f.label :mother, "Filiação (Mãe)" %>
+                      <%= f.text_field :mother, class: "form-control input-lg" %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <%= f.label :address, "Endereço" %>
+                      <%= f.text_field :address, class: "form-control input-lg" %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-9">
+                      <%= f.label :neighborhood, "Bairro" %>
+                      <%= f.text_field :neighborhood, class: "form-control input-lg" %>
+                    </div>
+                    <div class="col-xs-3">
+                      <%= f.label :uf, "UF" %>
+                      <%= f.text_field :uf, class: "form-control input-lg" %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-8">
+                      <%= f.label :zip_code, "CEP" %>
+                      <%= f.text_field :zip_code, class: "form-control input-lg zip_code" %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <%= f.label :special_needs, "Necessidades Especiais: (Física, Mental, Visual, Auditiva ou Nenhuma)" %>
+                      <%= f.text_field :special_needs, class: "form-control input-lg" %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <%= f.label :complement, "Complemento" %>
+                      <%= f.text_field :complement, class: "form-control input-lg" %>
+                    </div>
+                  </div>
+
+
+
+
+
+
+                  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                  <% end %>
+
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <%= f.label :password, "Senha" %> <i>(deixe em branco se você não deseja alterar)</i><br/>
+                      <%= f.password_field :password, autocomplete: "off", class: "form-control input-lg" %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <%= f.label :password_confirmation, "Confirmação de Senha" %><br/>
+                      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control input-lg" %>
+                    </div>
+                  </div>
+                  <hr>
+
+
+
+                  <!--<div class="form-group">-->
+                  <!--<div class="col-xs-12">-->
+
+                  <!--<h3>Cancelar minha Conta</h3>-->
+
+                  <!--<p>Não precisa mais ter um conta aqui? <%#= button_to "Cancelar minha conta", registration_path(resource_name), data: { confirm: "Tem Certeza?" }, method: :delete %></p>-->
+
+                  <!--</div>-->
+                  <!--</div>-->
+
                 </div>
-
-                <div class="form-group">
-                  <br>
-                  <br>
-                  <div class="col-xs-12">
-                    <label class="css-input css-checkbox css-checkbox-success">
-                      <%= f.check_box :need_certificate  ,class:"form-control  cpf"%><span></span>Deseja Certificado para os eventos?
-                    </label>
-                  </div>
-                  <br>
-                  <br>
-
-                  <div class="col-xs-12">
-                    <%= f.label :email ,"Endereço de E-mail"%>
-                    <%= f.email_field :email, autofocus: true ,placeholder:"Enter your email..",class:"form-control input-lg"%>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-xs-6">
-                    <%= f.label :first_name ,"Primeiro Nome"%>
-                    <%= f.text_field :first_name ,placeholder:"Digite seu primeiro nome.." ,class:"form-control input-lg"%>
-                  </div>
-                  <div class="col-xs-6">
-                    <%= f.label :last_name ,"Sobrenome"%>
-                    <%= f.text_field :last_name ,placeholder:"Digite seu sobrenome nome.." ,class:"form-control input-lg"%>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <%= f.label :bio,"Biografia" %>
-                    <%= f.text_field :bio ,class:"form-control input-lg",placeholder:"Digite alguns detalhes sobre você mesmo.."%>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-6">
-                    <%= f.label :cpf ,"CPF"%>
-                    <%= f.text_field :cpf  ,class:"form-control input-lg cpf"%>
-                  </div>
-                  <div class="col-xs-6">
-                    <%= f.label :job_title ,"Cargo/Função"%>
-                    <%= f.text_field :job_title ,placeholder:"Digite seu Cargo/Função.." ,class:"form-control input-lg"%>
-                  </div>
-
-
-
-
-                  <div class="col-xs-6">
-                    <%= f.label :rg ,"Identidade"%>
-                    <%= f.text_field :rg  ,class:"form-control input-lg"%>
-                  </div>
-                  <div class="col-xs-6">
-                    <%= f.label :consignor_organ ,"Órgão Expedidor"%>
-                    <%= f.text_field :consignor_organ  ,class:"form-control input-lg"%>
-                  </div>
-
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <%= f.label :company,"Empresa" %>
-                    <%= f.text_field :company ,class:"form-control input-lg"%>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-6">
-                    <%= f.label :phone ,"Telefone (Fixo)"%>
-                    <%= f.text_field :phone  ,class:"form-control input-lg phone"%>
-                  </div>
-                  <div class="col-xs-6">
-                    <%= f.label :celphone ,"Telefone (Celular)"%>
-                    <%= f.text_field :celphone ,class:"form-control input-lg celphone"%>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <%= f.label :schooling ,"Escolaridade"%>
-                    <%= f.select :schooling, ['Ensino Médio Incompleto', 'Ensino Médio Completo','Ensino Superior','Pós-Graduação'] %>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-6">
-                    <%= f.label :birth_date ,"Data de Nascimento"%>
-                    <%= date_picker f, :birth_date%>
-                  </div>
-                  <div class="col-xs-6" style="margin-top: 20px;font-size: 20px">
-                    <%= f.label :gender ,"Sexo"%>
-                    <%= f.select :gender, ['Masculino', 'Feminino'] %>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-6">
-                    <%= f.label :marital_status ,"Estado Civil"%>
-                    <%= f.text_field :marital_status  ,class:"form-control input-lg"%>
-                  </div>
-                  <div class="col-xs-6">
-                    <%= f.label :place_of_birth ,"Naturalidade"%>
-                    <%= f.text_field :place_of_birth, class:"form-control input-lg" %>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-6">
-                    <%= f.label :father ,"Filiação (Pai)"%>
-                    <%= f.text_field :father  ,class:"form-control input-lg"%>
-                  </div>
-                  <div class="col-xs-6">
-                    <%= f.label :mother ,"Filiação (Mãe)"%>
-                    <%= f.text_field :mother, class:"form-control input-lg" %>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <%= f.label :address ,"Endereço"%>
-                    <%= f.text_field :address ,class:"form-control input-lg"%>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-9">
-                    <%= f.label :neighborhood ,"Bairro"%>
-                    <%= f.text_field :neighborhood  ,class:"form-control input-lg"%>
-                  </div>
-                  <div class="col-xs-3">
-                    <%= f.label :uf ,"UF"%>
-                    <%= f.text_field :uf, class:"form-control input-lg" %>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-8">
-                    <%= f.label :zip_code ,"CEP"%>
-                    <%= f.text_field :zip_code ,class:"form-control input-lg zip_code"%>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <%= f.label :special_needs ,"Necessidades Especiais: (Física, Mental, Visual, Auditiva ou Nenhuma)"%>
-                    <%= f.text_field :special_needs ,class:"form-control input-lg"%>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <%= f.label :complement,"Complemento" %>
-                    <%= f.text_field :complement ,class:"form-control input-lg"%>
-                  </div>
-                </div>
-
-
-
-
-                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-                <% end %>
-
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <%= f.label :password,"Senha" %> <i>(deixe em branco se você não deseja alterar)</i><br />
-                    <%= f.password_field :password , autocomplete: "off" ,class:"form-control input-lg"%>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <%= f.label :password_confirmation,"Confirmação de Senha" %><br />
-                    <%= f.password_field :password_confirmation, autocomplete: "off",class:"form-control input-lg" %>
-                  </div>
-                </div>
-
-
-                <!--<div class="form-group">-->
-                <!--<div class="col-xs-12">-->
-
-                <!--<h3>Cancelar minha Conta</h3>-->
-
-                <!--<p>Não precisa mais ter um conta aqui? <%#= button_to "Cancelar minha conta", registration_path(resource_name), data: { confirm: "Tem Certeza?" }, method: :delete %></p>-->
-
-                <!--</div>-->
-                <!--</div>-->
-
               </div>
             </div>
-          </div>
-          <!--<div class="tab-pane fade" id="tab-profile-password">-->
-          <!--<div class="row items-push">-->
-          <!--<div class="col-sm-6 col-sm-offset-3 form-horizontal">-->
-          <!--<div class="form-group">-->
-          <!--<div class="col-xs-12">-->
-          <!--<label for="profile-password">Current Password</label>-->
-          <!--<input class="form-control input-lg" type="password" id="profile-password" name="profile-password">-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<hr>-->
-          <!--<div class="form-group">-->
-          <!--<div class="col-xs-12">-->
-          <!--<label for="profile-password-new">New Password</label>-->
-          <!--<input class="form-control input-lg" type="password" id="profile-password-new" name="profile-password-new">-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<div class="form-group">-->
-          <!--<div class="col-xs-12">-->
-          <!--<label for="profile-password-new-confirm">Confirm New Password</label>-->
-          <!--<input class="form-control input-lg" type="password" id="profile-password-new-confirm" name="profile-password-new-confirm">-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<div class="tab-pane fade active in" id="tab-profile-privacy">-->
-          <!--<div class="row items-push">-->
-          <!--<div class="col-sm-6 col-sm-offset-3 form-horizontal">-->
-          <!--<div class="form-group">-->
-          <!--<div class="col-xs-8">-->
-          <!--<div class="font-s13 font-w600">Online Status</div>-->
-          <!--<div class="font-s13 font-w400 text-muted">Show your status to all</div>-->
-          <!--</div>-->
-          <!--<div class="col-xs-4 text-right">-->
-          <!--<label class="css-input switch switch-sm switch-primary push-10-t">-->
-          <!--<input type="checkbox"><span></span>-->
-          <!--</label>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<hr>-->
-          <!--<div class="form-group">-->
-          <!--<div class="col-xs-8">-->
-          <!--<div class="font-s13 font-w600">Auto Updates</div>-->
-          <!--<div class="font-s13 font-w400 text-muted">Keep up to date</div>-->
-          <!--</div>-->
-          <!--<div class="col-xs-4 text-right">-->
-          <!--<label class="css-input switch switch-sm switch-primary push-10-t">-->
-          <!--<input type="checkbox"><span></span>-->
-          <!--</label>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<hr>-->
-          <!--<div class="form-group">-->
-          <!--<div class="col-xs-8">-->
-          <!--<div class="font-s13 font-w600">Notifications</div>-->
-          <!--<div class="font-s13 font-w400 text-muted">Do you need them?</div>-->
-          <!--</div>-->
-          <!--<div class="col-xs-4 text-right">-->
-          <!--<label class="css-input switch switch-sm switch-primary push-10-t">-->
-          <!--<input type="checkbox" checked=""><span></span>-->
-          <!--</label>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<hr>-->
-          <!--<div class="form-group">-->
-          <!--<div class="col-sm-8">-->
-          <!--<div class="font-s13 font-w600">API Access</div>-->
-          <!--<div class="font-s13 font-w400 text-muted">Enable/Disable access</div>-->
-          <!--</div>-->
-          <!--<div class="col-sm-4 text-right">-->
-          <!--<label class="css-input switch switch-sm switch-primary push-10-t">-->
-          <!--<input type="checkbox" checked=""><span></span>-->
-          <!--</label>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
-        </div>
-        <div class="block-content block-content-full bg-gray-lighter text-center">
-          <%#= f.submit "Atualizar",:class=>"btn btn-sm btn-primary" %>
-          <%= f.submit "Atualizar",:class=>"btn btn-success" %>
+            <!--<div class="tab-pane fade" id="tab-profile-password">-->
+            <!--<div class="row items-push">-->
+            <!--<div class="col-sm-6 col-sm-offset-3 form-horizontal">-->
+            <!--<div class="form-group">-->
+            <!--<div class="col-xs-12">-->
+            <!--<label for="profile-password">Current Password</label>-->
+            <!--<input class="form-control input-lg" type="password" id="profile-password" name="profile-password">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<hr>-->
+            <!--<div class="form-group">-->
+            <!--<div class="col-xs-12">-->
+            <!--<label for="profile-password-new">New Password</label>-->
+            <!--<input class="form-control input-lg" type="password" id="profile-password-new" name="profile-password-new">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+            <!--<div class="col-xs-12">-->
+            <!--<label for="profile-password-new-confirm">Confirm New Password</label>-->
+            <!--<input class="form-control input-lg" type="password" id="profile-password-new-confirm" name="profile-password-new-confirm">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="tab-pane fade active in" id="tab-profile-privacy">-->
+            <!--<div class="row items-push">-->
+            <!--<div class="col-sm-6 col-sm-offset-3 form-horizontal">-->
+            <!--<div class="form-group">-->
+            <!--<div class="col-xs-8">-->
+            <!--<div class="font-s13 font-w600">Online Status</div>-->
+            <!--<div class="font-s13 font-w400 text-muted">Show your status to all</div>-->
+            <!--</div>-->
+            <!--<div class="col-xs-4 text-right">-->
+            <!--<label class="css-input switch switch-sm switch-primary push-10-t">-->
+            <!--<input type="checkbox"><span></span>-->
+            <!--</label>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<hr>-->
+            <!--<div class="form-group">-->
+            <!--<div class="col-xs-8">-->
+            <!--<div class="font-s13 font-w600">Auto Updates</div>-->
+            <!--<div class="font-s13 font-w400 text-muted">Keep up to date</div>-->
+            <!--</div>-->
+            <!--<div class="col-xs-4 text-right">-->
+            <!--<label class="css-input switch switch-sm switch-primary push-10-t">-->
+            <!--<input type="checkbox"><span></span>-->
+            <!--</label>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<hr>-->
+            <!--<div class="form-group">-->
+            <!--<div class="col-xs-8">-->
+            <!--<div class="font-s13 font-w600">Notifications</div>-->
+            <!--<div class="font-s13 font-w400 text-muted">Do you need them?</div>-->
+            <!--</div>-->
+            <!--<div class="col-xs-4 text-right">-->
+            <!--<label class="css-input switch switch-sm switch-primary push-10-t">-->
+            <!--<input type="checkbox" checked=""><span></span>-->
+            <!--</label>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<hr>-->
+            <!--<div class="form-group">-->
+            <!--<div class="col-sm-8">-->
+            <!--<div class="font-s13 font-w600">API Access</div>-->
+            <!--<div class="font-s13 font-w400 text-muted">Enable/Disable access</div>-->
+            <!--</div>-->
+            <!--<div class="col-sm-4 text-right">-->
+            <!--<label class="css-input switch switch-sm switch-primary push-10-t">-->
+            <!--<input type="checkbox" checked=""><span></span>-->
+            <!--</label>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <h4>Redes Sociais </h4>
+            <br>
+            <br>
+            <table id="social_networks_table" class="table table-striped table-condensed net">
+              <tr>
+                <th>Link</th>
+                <th>Ações</th>
+              </tr>
+              <%= f.fields_for :social_networks, :wrapper => false do |social_network| %>
+                  <tr class="fields">
+                    <td>
+                      <%= social_network.hidden_field :user_id, :value => current_user.id %>
+                      <%= social_network.text_field :link  ,class: "form-control input-sm"%>
+                    </td>
+                    <td>
+                      <%= social_network.link_to_remove "Remover"  ,class: "btn btn-danger btn-mini"%>
+                    </td>
+                  </tr>
+              <% end %>
 
+            </table>
+                <%= f.link_to_add "Nova Rede Social", :social_networks, class: 'btn btn-success btn-mini' ,'data-target' => '#social_networks_table' %>
+
+          </div>
+          <div class="block-content block-content-full bg-gray-lighter text-center">
+            <%#= f.submit "Atualizar",:class=>"btn btn-sm btn-primary" %>
+            <%= f.submit "Atualizar", :class => "btn btn-success" %>
+
+          </div>
         </div>
-      </div>
-  <%end%>
-</div>
+    <% end %>
+  </div>
 </main>
 
 
@@ -334,28 +360,32 @@
   swal({
     title: "Dados necessarios para emissão de certificado",
     text: "Para que possamos emitir  seu certificado  precisa preencher todos os dados de seu perfil!",
-    type: "warning",   showCancelButton: false,
+    type: "warning", showCancelButton: false,
     confirmButtonColor: "#00B300",
     confirmButtonText: "Ok Entendi!",
-    closeOnConfirm: false });
+    closeOnConfirm: false
+  });
   <%end%>
 
-  $(document).ready(function() {
+  $(document).ready(function () {
 
     $('.cpf').mask('000.000.000-00', {reverse: true});
     $('.zip_code').mask('99-999.999');
     $('.phone').mask('(99) 9999-9999');
     $('.celphone').mask('(99) 9999-9999');
     //$(".datepicker").mask('99/99/9999');
-  } );
+  });
 
 
   $('.data').datepicker({
     format: 'dd/mm/yyyy',
     language: 'pt-BR'
   });
-    $('.data').mask('99/99/9999');
+  $('.data').mask('99/99/9999');
 </script>
+
+
+
 
 
 

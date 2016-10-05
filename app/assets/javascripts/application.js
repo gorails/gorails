@@ -26,6 +26,8 @@
 //= require maskedinput
 //= require plugins/magnific-popup/magnific-popup.min
 //= require commontator/application
-//= require sweet-alert
+//= require sweetalert
+//= require sweet-alert-confirm
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker.pt
+//= require jquery_nested_form

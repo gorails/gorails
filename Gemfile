@@ -12,7 +12,7 @@ gem 'kaminari'
 gem 'bootstrap_form'
 gem 'pdfkit'
 gem 'jquery-rails'
-gem 'carrierwave', '0.11.0' #, github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave', '0.11.2' #, github: 'carrierwaveuploader/carrierwave'
 gem 'rmagick'
 gem "mini_magick",'>= 4.5.1'
 gem "cancan"
@@ -21,7 +21,7 @@ gem 'nested_form'
 gem 'sweet-alert'
 gem 'sweet-alert-confirm'
 gem 'tzinfo-data','>= 1.2016.3'
-gem 'devise'
+gem 'devise','>=4.1.0'
 gem 'cancancan'
 gem 'rolify','>= 5.1.0'
 gem 'coveralls', require: false
@@ -36,14 +36,18 @@ gem 'omniauth-linkedin'
 gem 'figaro'
 gem 'commontator', '~> 4.11.1'
 gem 'acts_as_votable'
-gem 'newrelic_rpm','>= 3.15.1.316'
+gem 'newrelic_rpm','>= 3.15.2.317'
 gem "recaptcha",'~> 1.3.0', require: "recaptcha/rails"
 gem 'public_activity'
 gem "burgundy"
-gem 'sweetalert-rails'
+gem 'sweetalert-rails','>=1.1.3'
 gem 'gibbon', '~> 2.2', '>= 2.2.3'
 gem 'bootstrap-datepicker-rails'
 gem 'brdata'
+gem 'configatron'
+gem 'redcarpet'
+gem 'coderay'
+gem "github_api"
 
 group :doc do
   gem 'sdoc', :require => false
@@ -58,6 +62,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'rails_layout'
+  gem 'rails-erd'
 end
 
 group :development, :test do
@@ -66,6 +71,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'cpf_faker', '~> 1.3'
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem "codeclimate-test-reporter", require: nil

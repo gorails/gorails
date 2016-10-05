@@ -9,9 +9,10 @@
              <%= link_to edit_link_category_path(resource) , data: { toggle: 'tooltip', original_title: I18n.t('misc.action.edit')}, title: '', class: "btn btn-xs btn-default" do %>
              <i class="fa fa-pencil"></i>
            <% end %>
-             <%= link_to link_category_path(resource) ,method: "delete", data: { toggle: 'tooltip', original_title: I18n.t('misc.action.destroy')}, title: '', class: "btn btn-xs btn-default" do %>
-             <i class="fa fa-times"></i>
-           <% end %> 
+
+          <%= link_to link_category_path(resource), method: :delete, data: { confirm: 'Are you sure?' }, title: '', class: "btn btn-xs btn-default" do %>
+              <i class="fa fa-times"></i>
+          <% end %>
         </div>
       </td>
     </tr>

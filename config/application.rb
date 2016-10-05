@@ -48,6 +48,7 @@ module Gorails
     require Rails.root.join("config/initializers/custom_public_exceptions")
     config.exceptions_app = CustomPublicExceptions.new(Rails.public_path)
 
-
+    settings_data = File.read(Rails.root.join("config/settings.yml"))
+    configatron.configure_from_hash(YAML.load(settings_data))
   end
 end

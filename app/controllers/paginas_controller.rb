@@ -1,25 +1,28 @@
 # app/controllers/paginas_controller.rb
 class PaginasController < ApplicationController
-  
-  # GET /paginas/quem-somos
-  # GET /paginas/home
+
+  before_filter :validate_page!, only: %i(show)
+
+  # It renders only whitelisted pages
   def show
-    if pagina_valida?
-      render template: "paginas/#{params[:pagina]}"
-    else
-      render file: "public/404.html", status: :not_found
-    end
+    render(page_path)
   end
 
-
   private
-# Returns true if the requested file exists or raise unknown format if not
-  def pagina_valida?
-    requested_file =  ActionController::Base.helpers.sanitize(params[:pagina])
-    if File.exist?(Pathname.new(Rails.root + "app/views/paginas/#{requested_file}.html.erb"))
-      true
-    else
-      raise "Unknown file format requested"
-    end
+
+  def validate_page!
+    not_found unless valid_page?
+  end
+
+  def valid_page?
+    normalized_page_name.in?(configatron.static_pages.paginas)
+  end
+
+  def normalized_page_name
+    @page_name ||= ActionController::Base.helpers.sanitize(params[:pagina].to_s)
+  end
+
+  def page_path
+    "paginas/#{normalized_page_name}"
   end
 end

@@ -1,0 +1,31 @@
+<div class="bg-image" style="background-image: url('<%=asset_path "bg-red.jpg"%>')";>
+  <div class="bg-primary-dark-op">
+    <section class="content content-full content-boxed">
+      <div class="push-100-t push-50 text-center">
+        <h1 class="h2 text-white push-10 animated fadeInDown" data-toggle="appear" data-class="animated fadeInDown"> <%= @event.name %></h1>
+        <h2 class="h4 text-white-op animated fadeInDown" data-toggle="appear" data-class="animated fadeInDown"><%= @event.start_at.strftime("Data %d/%m/%Y") %></h2>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="bg-white">
+  <section class="content content-mini content-mini-full content-boxed overflow-hidden">
+    <ol class="breadcrumb">
+      <li><%= link_to("Eventos", events_path, class: "text-primary-dark") %></li>
+      <li><%= link_to(@event.name, event_path(@event), class: "text-primary-dark") %></li>
+      <li>Gerenciador de presenças</li>
+    </ol>
+  </section>
+</div>
+
+<div class="panel panel-default ma-20">
+  <div class="panel-heading">Gerenciador de presenças de inscritos do evento</div>
+  <div class="panel-body pa-20">
+    <% if @registrations.present? %>
+      <%= render "registrations", registrations: @registrations, presents_count: @presents %>
+    <% else %>
+      <div class="alert alert-warning ma-20" role="alert">Não foi feita nenhuma inscrição para este evento até agora.</div>
+    <% end %>
+  </div>
+</div>

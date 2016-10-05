@@ -1,4 +1,20 @@
 class ApplicationController < ActionController::Base
+
+  rescue_from ActionController::RoutingError, with: -> { render_404  }
+  rescue_from ActionController::UnknownController, with: -> { render_404  }
+  rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
+
+  def render_404
+    respond_to do |format|
+      format.html { render('errors/error404', status: 404) }
+      format.all  { render(nothing: true, status: 404) }
+    end
+  end
+
+  def not_found
+    fail ActionController::RoutingError.new('Not Found')
+  end
+
   def redirect_to(*args)
     flash.keep
     super
@@ -21,5 +37,4 @@ class ApplicationController < ActionController::Base
   def gibbon
     @gibbon ||= Gibbon::Request.new
   end
-
 end

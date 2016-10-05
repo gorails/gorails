@@ -1,0 +1,15 @@
+static_pages:
+  paginas:
+    - home
+    - links_uteis
+    - parceiros
+    - politica-privacidade
+    - quem-somos
+    - termos-uso
+urls:
+  development:
+    host: localhost
+    protocol: http
+  production:
+    host: gorails.com.br
+    protocol: http

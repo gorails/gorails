@@ -1,88 +1,102 @@
-<main id="main-container" style="min-height: 277px;"><div class="content content-boxed">
+<main id="main-container" style="min-height: 277px;">
+  <div class="content content-boxed">
 
-
-
-   <%=render 'user_cover'%>
-  <div class="row">
-    <div class="col-sm-5 col-sm-push-7 col-lg-4 col-lg-push-8">
-      <div class="block">
-        <div class="block-content block-content-full text-center">
-          <%= link_to edit_user_registration_path, :class => 'navbar-link' do %>
-              <button class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit text-success"></i>Editar perfil</button>
-          <% end %>
+    <%= render 'user_cover' %>
+    <div class="row">
+      <div class="col-sm-5 col-sm-push-7 col-lg-4 col-lg-push-8">
+        <div class="block">
+          <div class="block-content block-content-full text-center">
+            <%= link_to edit_user_registration_path, :class => 'navbar-link' do %>
+                <button class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit text-success"></i>Editar perfil
+                </button>
+            <% end %>
+          </div>
         </div>
-      </div>
-      <div class="block">
-        <div class="block-content">
-          <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Biografia</h3>
-          <%if @user.bio%>
-          <p><%=@user.bio%></p>
-              <%else%>
-          Não ha biografia ainda, cria uma agora.
-              <%end%>
+        <div class="block">
+          <div class="block-content">
+            <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Biografia</h3>
+            <% if @user.bio %>
+                <p><%= @user.bio %></p>
+            <% else %>
+                Não ha biografia ainda, cria uma agora.
+            <% end %>
+          </div>
         </div>
-      </div>
-      <div class="block">
-        <div class="block-content">
-          <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Brindes Ganhos</h3>
+        <div class="block">
+          <div class="block-content">
+            <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Alertas</h3>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-content">
+            <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Brindes Ganhos</h3>
 
-          <% if @user.winners.any? %>
-              <table class="table table-borderless table-condensed">
-                <tbody>
-              <% @user.winners.order(:created_at).each do |winner| %>
-
-                    <tr>
-                      <td>
-                        <i class="fa fa-fw fa-book push-10-r"></i>
-                        Ganhou o brinde <%=winner.gift.name%>, no evento <%= winner.gift.event.name%><br>
-                      </td>
-                    </tr>
-
-
-
+            <% if @user.winners.any? %>
+                <table class="table table-borderless table-condensed">
+                  <tbody>
+                  <% @user.winners.order(:created_at).each do |winner| %>
+                      <tr>
+                        <td>
+                          <i class="fa fa-fw fa-book push-10-r"></i>
+                          Ganhou o brinde <%= winner.gift.name %>, no evento <%= winner.gift.event.name %><br>
+                        </td>
+                      </tr>
                   <% end %>
-              </tbody>
-              </table>
-          <% else %>
-              <p>
-                Você ainda não ganhou nenhum brinde em eventos
+                  </tbody>
+                </table>
+            <% else %>
+                <p>
+                  Você ainda não ganhou nenhum brinde em eventos
 
-              </p>
-          <% end %>
+                </p>
+            <% end %>
+          </div>
         </div>
+
       </div>
-
-
-
-    </div>
-    <div class="col-sm-7 col-sm-pull-5 col-lg-8 col-lg-pull-4">
-      <div class="block block-opt-refresh-icon6">
-        <div class="block-header">
-          <ul class="block-options">
-            <li>
-              <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
-            </li>
-            <li>
-              <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-            </li>
-          </ul>
-          <h3 class="block-title"><i class="fa fa-newspaper-o"></i> Atualizações</h3>
-        </div>
-        <div class="block-content">
-          <div class="block">
-            <div class="block-content">
-              <ul class="list list-activity push">
-                  <% @activities.each do |activity| %>
-                      <%#= link_to activity.owner.event_name, activity.owner if activity.owner %>
-                      <%= render_activity activity %>
-                  <% end %>
-              </ul>
+      <% if get_github_user(@user)!= nil %>
+          <div class="col-sm-7 col-sm-pull-5 col-lg-8 col-lg-pull-4">
+            <div class="block block-opt-refresh-icon6">
+              <div class="block-header">
+                <ul class="block-options">
+                  <li>
+                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle">
+                      <i class="si si-size-fullscreen"></i></button>
+                  </li>
+                  <li>
+                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo">
+                      <i class="si si-refresh"></i></button>
+                  </li>
+                </ul>
+                <h3 class="block-title"><i class="fa fa-newspaper-o"></i> Repositórios Github</h3>
+              </div>
+              <div class="block-content">
+                <div class="block">
+                  <div class="block-content">
+                    <% repositorios = Github::Client::Repos.new.list user: get_github_user(@user), auto_pagination: true %>
+                    <div class="row">
+                      <% repositorios.each_page do |page| %>
+                          <% page.each do |repo| %>
+                              <div class="col-sm-6 col-lg-4">
+                                <a class="block block-bordered block-link-hover3 text-center" href="javascript:void(0)">
+                                  <div class="block-content block-content-full bg-gray-lighter border-b" style="min-height: 150px;">
+                                    <div class="h5 font-w700"><i class="si si-notebook"></i> <%= repo.name %></div>
+                                    <div class="h7 text-muted text-uppercase push-5-t"> <%= repo.description.first(50) %></div>
+                                  </div>
+                                  <div class="block-content block-content-full block-content-mini">
+                                    <i class="fa fa-code-fork text-success"></i> <%= repo.forks %>
+                                  </div>
+                                </a>
+                              </div>
+                          <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
-</div>
 </main>

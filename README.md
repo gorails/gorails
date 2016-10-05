@@ -37,8 +37,12 @@ que o Houndci checa má práticas na sintaxe do código, isto é, se a leitura d
 demasiada complicada.
 
 ## Documentação [![Inline docs](http://inch-ci.org/github/gorails/gorails.svg?branch=master)](http://inch-ci.org/github/gorails/gorails)
+####Diagrama UML [PDF](https://github.com/gorails/gorails/blob/master/doc/uml_gorails.pdf) - Gerado em 11/05/2016 - 18:50
+Para gerar um novo diagrama atualizado em sua maquina basta rodar o comando rake
 
-
+```ruby
+rake uml:generate
+```
 
 ## Gerenciamento de Projeto [![Stories in Ready](https://badge.waffle.io/gorails/gorails.svg?label=ready&title=Ready)](http://waffle.io/gorails/gorails)
 
@@ -53,8 +57,3 @@ um chat em tempo real.
 ## Triagem de tarefas
 
 Trello(https://trello.com)
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/gorails/gorails/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
