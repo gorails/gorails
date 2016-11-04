@@ -5,17 +5,16 @@ FactoryGirl.define do
     nickname 'MyNickName'
     first_name 'MyFirstName'
     last_name 'MyLastName'
-    password '12345678'
-    password_confirmation '12345678'
+    email { generate(:email) }
+    password 'password123'
+    password_confirmation 'password123'
   end
 
-  factory :user_with_cpf, parent: :user do
-    email { generate(:email) }
+  factory :user_with_cpf, parent: :user do    
     cpf { Faker::CPF.numeric }
   end
 
-  factory :user_without_cpf, parent: :user do
-    email { generate(:email) }
+  factory :user_without_cpf, parent: :user do    
     cpf nil
   end
 
