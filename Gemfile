@@ -68,14 +68,15 @@ end
 
 group :development, :test do
   gem 'byebug'
+  gem 'cucumber-rails', '~> 1.4', '>= 1.4.2'
   gem "factory_girl_rails", "~> 4.0"
   gem 'dotenv', '~> 2.1', '>= 2.1.1'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
 end
 
 group :test do
   gem 'cpf_faker', '~> 1.3'
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers', '~> 3.1'
-  gem "codeclimate-test-reporter", require: nil
-  gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
+  gem "codeclimate-test-reporter", require: nil  
 end
