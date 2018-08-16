@@ -19,10 +19,15 @@
       <div class="panel-body">
 
         <div class="row">
-          <div class="col-lg-12">
-            <%= f.label :status, "Inscrições Abertas?" %><br>
-            <%= f.check_box :status %>
+          <div class="col-lg-3">
+            <%= f.check_box :status %>            
+            <%= f.label :status, "Inscrições Abertas?" %><br>            
           </div>
+
+          <div class="col-lg-3">
+            <%= f.check_box :provides_certificate %>          
+            <%= f.label :provides_certificate, "Emite certificado?" %>                
+          </div>                      
         </div>
 
         <div class="row">

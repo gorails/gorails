@@ -55,15 +55,18 @@
                               <%= f.label :cpf, "CPF" %>
                               <%= f.text_field :cpf, class: "form-control  cpf" %>
                           <% end %>
-                          <div class="col-xs-12">
-                            <label class="css-input css-checkbox css-checkbox-success">
-                              <%= f.check_box :need_certificate, class: "form-control  cpf" %><span></span>Deseja
-                              Certificado?
-                            </label>
-                          </div>
-
-                          <br>
-                          <br>
+                          
+                          <% if @event.provides_certificate.present? %>
+                            <div class="col-xs-12">
+                              <label class="css-input css-checkbox css-checkbox-success">
+                                <%= f.check_box :need_certificate, class: "form-control  cpf" %><span></span>Deseja
+                                Certificado?
+                              </label>
+                            </div>
+                            <br>
+                            <br>                            
+                          <% end %>
+                        
                           <%= f.submit "Inscrever-se", data: {disable_with: "Cadastrando..."}, class: "btn btn-block btn-rounded btn-noborder btn-success push-10" %>
                       <% end %>
                   <% end %>
