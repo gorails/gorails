@@ -9,6 +9,7 @@ RSpec.describe Event, type: :model do
   it { is_expected.to respond_to :participants_limit }
   it { is_expected.to respond_to :start_at }
   it { is_expected.to respond_to :end_at }
+  it { is_expected.to respond_to :provides_certificate}
 
   it { is_expected.to be_valid }
 
