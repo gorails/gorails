@@ -215,7 +215,7 @@
                         <div class="panel panel-default" style="background-color: #eaeaea">
                           <div class="panel-body">
                             <p>
-                              <%= winner.association :user, label_method: :full_name, value_method: :id, include_blank: false %>
+                              <%= winner.association :user, collection: f.object.users, label_method: :full_name, value_method: :id, include_blank: false %>
                               <br>
                               <%= winner.link_to_remove "Remover", class: 'btn btn-danger', data: {disable_with: "Fechando..."} %>
                             </p>
