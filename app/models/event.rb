@@ -12,6 +12,7 @@ class Event < ActiveRecord::Base
   has_many :partners
   has_many :gifts
   has_many :registrations, counter_cache: true
+  has_many :users, through: :registrations  
 
   belongs_to :user
 
