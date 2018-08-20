@@ -24,10 +24,15 @@
 
 class Partner < ActiveRecord::Base
   include PublicActivity::Model
-  tracked owner: ->(controller, model) { controller && controller.current_user }
-  belongs_to :event
-  has_many :attachments, as: :origin
+
   mount_uploader :logo, AttachmentsUploader
+
+  tracked owner: ->(controller, model) { controller && controller.current_user }
+
+  has_many :attachments, as: :origin
+
+  belongs_to :event
+
   accepts_nested_attributes_for :attachments
 
   enum category: [:sponsor, :supporter, :contributor]

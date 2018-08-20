@@ -215,18 +215,20 @@
                       <br>
                       <%= gift.link_to_remove "Remover", class: 'btn btn-danger', data: {disable_with: "Fechando..."} %>
                     </p>
-                    <%= gift.fields_for :winners do |winner| %>
+                    <% unless @event.new_record? %>
+                      <%= gift.fields_for :winners do |winner| %>
                         <div class="panel panel-default" style="background-color: #eaeaea">
                           <div class="panel-body">
                             <p>
-                              <%= winner.association :user, label_method: :full_name, value_method: :id, include_blank: false %>
+                              <%= winner.association :user, collection: f.object.users, label_method: :full_name, value_method: :id, include_blank: false %>
                               <br>
                               <%= winner.link_to_remove "Remover", class: 'btn btn-danger', data: {disable_with: "Fechando..."} %>
                             </p>
                           </div>
                         </div>
+                      <% end %>
+                      <%= gift.link_to_add "Adicionar um novo ganhador", :winners, class: 'btn btn-success' %>
                     <% end %>
-                    <%= gift.link_to_add "Adicionar um novo ganhador", :winners, class: 'btn btn-success' %>
                   </div>
                 </div>
             <% end %>
