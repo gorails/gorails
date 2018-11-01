@@ -68,6 +68,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable, :omniauthable
 
+  attr_accessor :terms_of_use
+
   tracked owner: ->(controller, model) { controller && controller.current_user }
   rolify
 
@@ -85,6 +87,7 @@ class User < ActiveRecord::Base
                         :gender, :marital_status, :place_of_birth, :mother,
                         :address, :neighborhood, :geography_state_id,
                         :zip_code, :special_needs, if: lambda { need_certificate == true }
+  validates :terms_of_use, acceptance: true                    
   validate :unicidade_cpf
 
   usar_como_cpf :cpf
@@ -132,7 +135,8 @@ class User < ActiveRecord::Base
     neighborhood: "Bairro",
     zip_code: "CEP",
     complement: "Complemento",
-    reset_password_token: "Token"
+    reset_password_token: "Token",
+    terms_of_use: "Termos de Uso"
   }.freeze
 
   def self.human_attribute_name(attr, vazio=nil)

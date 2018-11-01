@@ -50,8 +50,8 @@
 
                   <div class="form-group">
                     <div class="col-xs-12">
-                      <label class="css-input switch switch-sm switch-success">
-                        <input type="checkbox" id="register-terms" name="register-terms"><span></span> Eu aceito os termos &amp; condições
+                      <label class="css-input switch switch-sm switch-success">                        
+                        <%= f.check_box :terms_of_use, label: false, as: :boolean %> <span></span> Eu aceito os termos &amp; condições
                       </label>
                     </div>
                   </div>
