@@ -45,7 +45,7 @@ API_SECRET_CLOUD => Api Secret
 ``` 
 
 
-## Testes [![Build Status](https://travis-ci.org/gorails/gorails.svg?branch=master)](https://travis-ci.org/gorails/gorails)  [![Coverage Status](https://coveralls.io/repos/github/gorails/gorails/badge.svg?branch=master)](https://coveralls.io/github/gorails/gorails?branch=master)
+## Testes [![Build Status](https://travis-ci.org/gorails/gorails.svg?branch=master)](https://travis-ci.org/gorails/gorails)  [![Coverage Status](https://coveralls.io/repos/github/gorails/gorails/badge.svg?branch=master)](https://coveralls.io/github/gorails/gorails?branch=master) [![Open Source Helpers](https://www.codetriage.com/gorails/gorails/badges/users.svg)](https://www.codetriage.com/gorails/gorails)
  
 ## Dependências [![Dependency Status](https://gemnasium.com/gorails/gorails.svg)](https://gemnasium.com/gorails/gorails)
 
