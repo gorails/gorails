@@ -14,6 +14,7 @@ especificada no arquivo [.ruby-version](https://github.com/RubyCastsBrasil/RubyC
 
 - Faça o seu fork no projeto e clone ele para sua máquina
 
+
 - Rode:
 ```shell
 bundle install
@@ -28,6 +29,7 @@ cp config/database.example.yml config/database.yml
 ```shell
 cp config/application.example.yml config/application.yml
 ```
+
 
 - Execute o comando `rake db:create` para cria seu banco de dados.
 - Execute o comando `rake db:migrate` para criar todas as tabelas no seu banco de dados.
