@@ -1,4 +1,4 @@
-# GORAILS
+# AMAZING GORAILS
 
 Esse é o código fonte do site [GORAILS](http://www.gorails.com.br/).
 GORAILS tem como objetivo desenvolver um portal aonde todos os desenvolvedores de goiás e do brasil também possam se unir para beneficar a comunidade rails.
