@@ -282,7 +282,7 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oauth (0.5.4)
+    oauth (0.5.6)
     oauth2 (1.4.0)
       faraday (>= 0.8, < 0.13)
       jwt (~> 1.0)
